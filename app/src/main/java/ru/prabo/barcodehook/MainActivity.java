@@ -7,8 +7,13 @@ import android.content.IntentFilter;
 import android.content.Context;
 import android.content.BroadcastReceiver;
 import android.widget.TextView;
+import android.util.Log;
+
+import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "BarcodeHook";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,17 +24,19 @@ public class MainActivity extends AppCompatActivity {
         filter.addCategory(Intent.CATEGORY_DEFAULT);
         filter.addAction(getResources().getString(R.string.activity_intent_filter_action));
         registerReceiver(myBroadcastReceiver, filter);
+        Log.d(TAG, "Receiver registered");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(myBroadcastReceiver);
+        Log.d(TAG, "Receiver unregistered");
     }
 
     private BroadcastReceiver myBroadcastReceiver = new BroadcastReceiver() {
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(Context context, @NotNull Intent intent) {
             String action = intent.getAction();
             Bundle b = intent.getExtras();
 
@@ -38,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
                     displayScanResult(intent);
                 }
                 catch (Exception e){
-                    // exception
+                    Log.d(TAG, "Error display result");
                 }
             }
         }
     };
 
-    private void displayScanResult(Intent initiatingIntent) {
+    private void displayScanResult(@NotNull Intent initiatingIntent) {
 
         String decodedData = initiatingIntent.getStringExtra(getResources().getString(R.string.datawedge_intent_key_data));
 
@@ -52,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvBarcode.setText(decodedData);
 
+        Log.d(TAG, "Success: ".concat(decodedData));
     }
 
 }
