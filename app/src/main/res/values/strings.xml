@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">BarcodeHook</string>
-    <string name="activity_intent_filter_action">com.dwbasicintent1.ACTION</string>
+    <!--<string name="activity_intent_filter_action">com.dwbasicintent1.ACTION</string>-->
+    <string name="activity_intent_filter_action">com.zebra.datawedge.action</string>
+    <string name="activity_intent_filter_category">com.zebra.datawedge.category</string>
     <string name="datawedge_intent_key_data">com.symbol.datawedge.data_string</string>
 </resources>

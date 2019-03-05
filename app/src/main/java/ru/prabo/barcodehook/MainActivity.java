@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         IntentFilter filter = new IntentFilter();
-        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        //filter.addCategory(Intent.CATEGORY_DEFAULT);
+        filter.addCategory(getResources().getString(R.string.activity_intent_filter_category));
         filter.addAction(getResources().getString(R.string.activity_intent_filter_action));
         registerReceiver(myBroadcastReceiver, filter);
         Log.d(TAG, "Receiver registered");
